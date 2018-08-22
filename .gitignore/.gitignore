@@ -1,0 +1,35 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+date_default_timezone_set('UTC');
+$HASHKey=""; //特店專用Hashkey，固定值
+$pno=date("Ymdhis")."test";					//特店訂單編號，需是唯一值
+$seller_id="25128052A";						//特店編號，固定值
+$validate_method="sign";					//交易驗證方式，以hashsign驗證					
+$ntd="1";									//新台幣收款使用，NTD金額
+$return_url="";		//接收交易結果網址
+$device="mobile";
+$murl="";
+$ttime=date("Ymdhis");						//交易時間
+$timeout_rule="12h";						//指定付款時效，5m,10m,15m,30m,1h,2h,3h,5h,10h,12h，預設為12小時
+$count="1";									//商品種類，帶固定值1即可
+$pid0="A0001";								//商品編號，帶固定值即可
+$qty0="1";									//商品數量，帶固定值即可
+$pcode= SHA1($count.$device.$murl.$ntd.$pid0.$pno.$qty0.$return_url. $seller_id.$timeout_rule.$ttime.$validate_method. $HASHKey);		//計算hashsign值
+?>
+玉山銀行-支付寶交易測試1111</br></br>
+ <form action="https://ordertest.esuntrade.com/payment.aspx" method="POST" target="_blank">
+ 特店編號：<input type="test" name="seller_id" value="<?php echo $seller_id;?>">  </br>
+ 訂單編號：<input type="test" name="pno" value="<?php echo $pno;?>"></br>
+ 交易金額：<input type="test" name="ntd" value="<?php echo $ntd;?>"></br>
+ 交易時間：<input type="test" name="ttime" value="<?php echo $ttime; ?>"></br>
+ 付款時效：<input type="test" name="timeout_rule" value="<?php echo $timeout_rule; ?>"></br>
+ 驗證方式：<input type="test" name="validate_method" value="<?php echo $validate_method; ?>"></br>
+ 商品種類：<input type="test" name="count" value="<?php echo $count; ?>"></br>
+ device：<input type="test" name="device" value="<?php echo $device; ?>"></br>
+ murl：<input type="test" name="murl" value="<?php echo $murl; ?>"></br>
+ 商品編號：<input type="test" name="pid0" value="<?php echo $pid0; ?>"></br>
+ 商品數量：<input type="test" name="qty0" value="<?php echo $qty0; ?>"></br>
+ 回傳網址：<input type="test" name="return_url" value="<?php echo $return_url; ?>"></br>
+ 驗證碼：<input type="test" name="pcode" value="<?php echo $pcode;?>"></br>
+    <p><input type="submit" value="傳送模擬交易"></p>
+  </form>
